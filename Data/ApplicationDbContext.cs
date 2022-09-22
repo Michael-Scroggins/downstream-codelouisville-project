@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Downstream.Models;
 
 namespace Downstream.Data
 {
@@ -9,5 +10,6 @@ namespace Downstream.Data
             : base(options)
         {
         }
+        public DbSet<Downstream.Models.Ticket>? Ticket { get; set; }
     }
 }
