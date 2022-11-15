@@ -10,7 +10,7 @@ namespace Downstream.Models
         public string? Title { get; set; }
 
         [DisplayName("Issue Type")]
-        public string? issueType { get; set; }
+        public string? IssueType { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Date Ticket Entered")]
@@ -18,7 +18,7 @@ namespace Downstream.Models
 
         [DataType(DataType.Date)]
         [DisplayName("Required Resolution Time")]
-        public DateTime requiredResolutionTime { get; set; }
+        public DateTime RequiredResolutionTime { get; set; }
 
 
     }

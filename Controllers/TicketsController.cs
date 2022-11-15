@@ -22,13 +22,22 @@ namespace Downstream.Controllers
 
 
         // GET: Tickets
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string ticketIssueType, string searchString)
         {
 
             if (_context.Ticket == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Ticket is null.");
             }
+
+
+
+
+
+            IQueryable<string> issueTypeQuery = from t in _context.Ticket
+                                                orderby t.IssueType
+                                                select t.IssueType;
+
 
             var tickets = from t in _context.Ticket
                           select t;
@@ -38,7 +47,19 @@ namespace Downstream.Controllers
                 tickets = tickets.Where(s => s.Title!.Contains(searchString));
             }
 
-            return View(await tickets.ToListAsync());
+            if (!string.IsNullOrEmpty(ticketIssueType))
+            {
+                tickets = tickets.Where(x => x.IssueType == ticketIssueType);
+            }
+
+            var ticketIssueTypeVM = new TicketIssueTypeViewModel
+            {
+                IssueTypes = new SelectList(await issueTypeQuery.Distinct().ToListAsync()),
+                Tickets = await tickets.ToListAsync()
+
+            };
+
+            return View(ticketIssueTypeVM);
 
      
             

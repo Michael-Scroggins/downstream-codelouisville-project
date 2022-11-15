@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Downstream.Models.Ticket>
+﻿@model Downstream.Models.TicketIssueTypeViewModel
+
+
 
 @{
     ViewData["Title"] = "Index";
@@ -13,6 +15,11 @@
 
 <form asp-controller="Tickets" asp-action="Index" method="get">
     <p>
+        
+        <select asp-for="TicketIssueType" asp-items="Model.IssueTypes">
+            <option value="">All</option>
+        </select>
+  
         Title: <input type="text" name="SearchString" />
         <input type="submit" value="Filter" />
     </p>
@@ -21,34 +28,34 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Tickets![0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.issueType)
+                @Html.DisplayNameFor(model => model.Tickets![0].IssueType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TimeEntered)
+                @Html.DisplayNameFor(model => model.Tickets![0].TimeEntered)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.requiredResolutionTime)
+                @Html.DisplayNameFor(model => model.Tickets![0].RequiredResolutionTime)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Tickets!) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.issueType)
+                @Html.DisplayFor(modelItem => item.IssueType)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TimeEntered)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.requiredResolutionTime)
+                @Html.DisplayFor(modelItem => item.RequiredResolutionTime)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
