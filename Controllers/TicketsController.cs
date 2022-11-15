@@ -13,10 +13,6 @@ namespace Downstream.Controllers
     public class TicketsController : Controller
     {
 
-
-        
-
-
         private readonly ApplicationDbContext _context;
 
         public TicketsController(ApplicationDbContext context)
@@ -24,12 +20,29 @@ namespace Downstream.Controllers
             _context = context;
         }
 
+
         // GET: Tickets
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-              return _context.Ticket != null ? 
-                          View(await _context.Ticket.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Ticket'  is null.");
+
+            if (_context.Ticket == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Ticket is null.");
+            }
+
+            var tickets = from t in _context.Ticket
+                          select t;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                tickets = tickets.Where(s => s.Title!.Contains(searchString));
+            }
+
+
+            return View(await tickets.ToListAsync());
+
+     
+            
         }
 
         // GET: Tickets/Details/5
@@ -136,6 +149,7 @@ namespace Downstream.Controllers
             if (ticket == null)
             {
                 return NotFound();
+               
             }
 
             return View(ticket);
