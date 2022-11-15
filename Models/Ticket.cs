@@ -10,7 +10,7 @@ namespace Downstream.Models
         public string? Title { get; set; }
 
         [DisplayName("Issue Type")]
-        public IssueType issueType { get; set; }
+        public string? issueType { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Date Ticket Entered")]

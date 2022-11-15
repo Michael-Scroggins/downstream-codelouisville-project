@@ -38,7 +38,6 @@ namespace Downstream.Controllers
                 tickets = tickets.Where(s => s.Title!.Contains(searchString));
             }
 
-
             return View(await tickets.ToListAsync());
 
      
