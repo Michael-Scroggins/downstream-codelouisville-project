@@ -21,6 +21,7 @@ namespace Downstream.Controllers
         }
 
 
+
         // GET: Tickets
         public async Task<IActionResult> Index(string ticketIssueType, string searchString)
         {
@@ -33,6 +34,9 @@ namespace Downstream.Controllers
 
 
 
+            int ticketsCount = _context.Ticket.Count();
+
+            ViewBag.TicketsCount = ticketsCount;
 
             IQueryable<string> issueTypeQuery = from t in _context.Ticket
                                                 orderby t.IssueType
@@ -94,7 +98,7 @@ namespace Downstream.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,issueType,TimeEntered,requiredResolutionTime")] Ticket ticket)
+        public async Task<IActionResult> Create([Bind("Id,Title,issueType,TimeEntered,RequiredResolutionTime")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
@@ -126,7 +130,7 @@ namespace Downstream.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,issueType,TimeEntered,requiredResolutionTime")] Ticket ticket)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,issueType,TimeEntered,RequiredResolutionTime")] Ticket ticket)
         {
             if (id != ticket.Id)
             {
@@ -198,5 +202,7 @@ namespace Downstream.Controllers
         {
           return (_context.Ticket?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
     }
 }

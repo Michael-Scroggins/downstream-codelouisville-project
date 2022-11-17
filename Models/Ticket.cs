@@ -16,6 +16,11 @@ namespace Downstream.Models
         [DisplayName("Date Ticket Entered")]
         public DateTime TimeEntered { get; set; }
 
+        public Ticket()
+        {
+            TimeEntered = DateTime.Now;
+        }
+
         [DataType(DataType.Date)]
         [DisplayName("Required Resolution Time")]
         public DateTime RequiredResolutionTime { get; set; }
