@@ -7,14 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Downstream.Data;
 using Downstream.Models;
+using Microsoft.Extensions.Logging;
+using NLog;
+using NLog.Web;
+using System.IO;
 
 namespace Downstream.Controllers
 {
     public class TicketsController : Controller
     {
-
         private readonly ApplicationDbContext _context;
+        
 
+        
+ 
         public TicketsController(ApplicationDbContext context)
         {
             _context = context;
@@ -26,13 +32,8 @@ namespace Downstream.Controllers
         public async Task<IActionResult> Index(string ticketIssueType, string searchString)
         {
 
+            
 
-
-
-
-          //  issueTypeList.Add(new SelectListItem { Text = "Locked Out", Value = "1" });
-            //issueTypeList.Add(new SelectListItem { Text = "VPN", Value = "2" });
-           // issueTypeList.Add(new SelectListItem { Text = "Software Request", Value = "3" });
 
             if (_context.Ticket == null)
             {
@@ -84,7 +85,7 @@ namespace Downstream.Controllers
             {
                 return NotFound();
             }
-
+            
             var ticket = await _context.Ticket
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (ticket == null)
@@ -108,11 +109,30 @@ namespace Downstream.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,IssueType,TimeEntered,RequiredResolutionTime")] Ticket ticket)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                _context.Add(ticket);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    BasicLogger.WriteToFile("CreateLog", DateTime.Now.ToString() + " Ticket Create action completed successfully from Tickets controller!");
+                    _context.Add(ticket);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+
+                 
+                    
+                }
+                
+
+        
+         
+            }
+
+            catch 
+            {
+
+                BasicLogger.WriteToFile("CreateLog", DateTime.Now.ToString() + " Error occured during Create action within Tickets controller!");
+
             }
             return View(ticket);
         }
