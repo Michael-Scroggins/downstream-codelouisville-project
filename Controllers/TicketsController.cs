@@ -26,6 +26,14 @@ namespace Downstream.Controllers
         public async Task<IActionResult> Index(string ticketIssueType, string searchString)
         {
 
+
+
+
+
+          //  issueTypeList.Add(new SelectListItem { Text = "Locked Out", Value = "1" });
+            //issueTypeList.Add(new SelectListItem { Text = "VPN", Value = "2" });
+           // issueTypeList.Add(new SelectListItem { Text = "Software Request", Value = "3" });
+
             if (_context.Ticket == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Ticket is null.");
@@ -98,7 +106,7 @@ namespace Downstream.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,issueType,TimeEntered,RequiredResolutionTime")] Ticket ticket)
+        public async Task<IActionResult> Create([Bind("Id,Title,IssueType,TimeEntered,RequiredResolutionTime")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
@@ -130,7 +138,7 @@ namespace Downstream.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,issueType,TimeEntered,RequiredResolutionTime")] Ticket ticket)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,IssueType,TimeEntered,RequiredResolutionTime")] Ticket ticket)
         {
             if (id != ticket.Id)
             {
