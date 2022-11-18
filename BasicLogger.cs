@@ -2,7 +2,8 @@
 {
     public class BasicLogger
     {
-
+        // Displays the Single Responsibility Principle of SOLID as this is now handled in it's own separate class instead of within the Tickets Controller. This ensures that the purpose of this class is clear and isn't convoluting other classes.
+        // This was also developed in a way to follow the Open/Closed principle.
         public static void WriteToFile(string fileName, string fileContent)
         {
             fileName += ".txt";

@@ -27,21 +27,12 @@ namespace Downstream.Controllers
         public async Task<IActionResult> Index(string ticketIssueType, string searchString)
         {
 
-            List<string> issueTypeList = new List<string>();
-            issueTypeList.Add("Forgot Password");
-            issueTypeList.Add("VPN");
-            issueTypeList.Add("Software Request");
-
-            ViewBag.IssueTypeSuggestions = issueTypeList;
-
-
-
             if (_context.Ticket == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Ticket is null.");
             }
 
-
+            
             int ticketsCount = _context.Ticket.Count();
 
             ViewBag.TicketsCount = ticketsCount;
@@ -223,6 +214,7 @@ namespace Downstream.Controllers
         {
           return (_context.Ticket?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
 
 
     }
