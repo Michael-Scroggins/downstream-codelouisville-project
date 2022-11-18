@@ -17,30 +17,29 @@ namespace Downstream.Controllers
     public class TicketsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        
 
-        
- 
         public TicketsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-
-
         // GET: Tickets
         public async Task<IActionResult> Index(string ticketIssueType, string searchString)
         {
 
-            
+            List<string> issueTypeList = new List<string>();
+            issueTypeList.Add("Forgot Password");
+            issueTypeList.Add("VPN");
+            issueTypeList.Add("Software Request");
+
+            ViewBag.IssueTypeSuggestions = issueTypeList;
+
 
 
             if (_context.Ticket == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Ticket is null.");
             }
-
-
 
 
             int ticketsCount = _context.Ticket.Count();
@@ -74,8 +73,6 @@ namespace Downstream.Controllers
 
             return View(ticketIssueTypeVM);
 
-     
-            
         }
 
         // GET: Tickets/Details/5
@@ -119,12 +116,8 @@ namespace Downstream.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
 
-                 
-                    
                 }
-                
-
-        
+               
          
             }
 

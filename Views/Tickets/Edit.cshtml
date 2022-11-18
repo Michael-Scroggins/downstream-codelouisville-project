@@ -41,6 +41,25 @@
     </div>
 </div>
 
+<div class ="flex-column">
+                <br />
+                <p class="fst-italic">Recommended examples for issue type are:</p>
+                @{
+                    List<string> currentSuggestedIssueTypes = IssueTypes.DisplayIssueTypes("Forgot Password", "VPN", "Software Request");
+               }
+
+               <ul>
+
+               @for (int i =0;i<currentSuggestedIssueTypes.Count;i++)
+                {
+                 <li class="fst-italic">@currentSuggestedIssueTypes[i]</li>
+                }
+
+                </ul>
+
+
+</div>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
