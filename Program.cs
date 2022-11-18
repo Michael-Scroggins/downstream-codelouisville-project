@@ -13,6 +13,8 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+
+    
     // Add services to the container.
 
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -51,6 +53,8 @@ try
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    AppDbInitializer.Seed(app);
 
     app.Run();
 }
