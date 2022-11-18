@@ -20,6 +20,7 @@ namespace Downstream.Data
                         {
                             Title = "Can't login to company email",
                             IssueType = "Locked Out",
+                             Description = "I'm getting a message saying I'm locked out of my company email",
                             TimeEntered = DateTime.Now,
                             RequiredResolutionTime = Convert.ToDateTime("12/11/2022")
 
@@ -29,6 +30,7 @@ namespace Downstream.Data
                         {
                             Title = "Need License for Photoshop",
                             IssueType = "Software Request",
+                            Description = "I've been needing a Photoshop license to perform my job",
                             TimeEntered = DateTime.Now,
                             RequiredResolutionTime = Convert.ToDateTime("12/28/2022")
 

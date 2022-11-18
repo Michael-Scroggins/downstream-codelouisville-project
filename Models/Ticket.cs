@@ -12,6 +12,8 @@ namespace Downstream.Models
         [DisplayName("Issue Type")]
         public string? IssueType { get; set; }
 
+        public string? Description { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayName("Date Ticket Entered")]
         public DateTime TimeEntered { get; set; }
