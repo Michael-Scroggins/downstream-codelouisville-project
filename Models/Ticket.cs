@@ -27,6 +27,9 @@ namespace Downstream.Models
         [DisplayName("Required Resolution Time")]
         public DateTime RequiredResolutionTime { get; set; }
 
+        [DisplayName("Resolved")]
+        public Boolean IsResolved { get; set; }
+
 
     }
 }

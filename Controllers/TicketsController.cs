@@ -95,7 +95,7 @@ namespace Downstream.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description, IssueType,TimeEntered,RequiredResolutionTime")] Ticket ticket)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description, IssueType,TimeEntered,RequiredResolutionTime, IsResolved")] Ticket ticket)
         {
 
             try
@@ -142,7 +142,7 @@ namespace Downstream.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description, IssueType,TimeEntered,RequiredResolutionTime")] Ticket ticket)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description, IssueType,TimeEntered,RequiredResolutionTime, IsResolved")] Ticket ticket)
         {
             if (id != ticket.Id)
             {

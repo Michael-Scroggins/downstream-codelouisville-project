@@ -9,7 +9,6 @@ namespace Downstream.Data
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-
                 context.Database.EnsureCreated();
 
                 if (!context.Ticket.Any())
@@ -22,7 +21,8 @@ namespace Downstream.Data
                             IssueType = "Locked Out",
                              Description = "I'm getting a message saying I'm locked out of my company email",
                             TimeEntered = DateTime.Now,
-                            RequiredResolutionTime = Convert.ToDateTime("12/11/2022")
+                            RequiredResolutionTime = Convert.ToDateTime("12/11/2022"),
+                            IsResolved = false
 
                         },
 
@@ -32,14 +32,13 @@ namespace Downstream.Data
                             IssueType = "Software Request",
                             Description = "I've been needing a Photoshop license to perform my job",
                             TimeEntered = DateTime.Now,
-                            RequiredResolutionTime = Convert.ToDateTime("12/28/2022")
+                            RequiredResolutionTime = Convert.ToDateTime("12/28/2022"),
+                            IsResolved = false
 
                         }
 
-                    });
+                    }); 
                     context.SaveChanges();
-
-                        
 
                 }
             }
